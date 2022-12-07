@@ -13,6 +13,11 @@ public class EnemyPoolEditor : Editor
     {
         _enemyPool = (EnemyPool)target;
         _spawnedEnemies = serializedObject.FindProperty("_spawnedEnemies");
+
+        if (_enemyPool.SpawnDatas == null || _enemyPool.SpawnDatas.Count == 0)
+        {
+            _enemyPool.InitializeSpawnData();
+        }
     }
 
     public override void OnInspectorGUI()
