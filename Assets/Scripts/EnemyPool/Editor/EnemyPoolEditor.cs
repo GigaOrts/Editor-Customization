@@ -6,15 +6,8 @@ using UnityEditor;
 [CustomEditor(typeof(EnemyPool))]
 public class EnemyPoolEditor : Editor
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnInspectorGUI()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.OnInspectorGUI();
     }
 }
