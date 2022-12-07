@@ -41,18 +41,20 @@ public class EnemyPoolEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 
+    private void DrawResetButton()
+    {
+        if (GUILayout.Button("Reset", GUILayout.Width(50)))
+        {
+            _enemyPool.InitializeSpawnData();
+        }
+    }
+
     private void DrawSpawnButton()
     {
         if(GUILayout.Button("Spawn", GUILayout.Width(50)))
         {
             //spawn
         }
-    }
-
-    private void DrawResetButton()
-    {
-        if (GUILayout.Button("Reset", GUILayout.Width(50)))
-            _enemyPool.InitializeSpawnData();
     }
 
     private void DrawFlaggedEnemies()

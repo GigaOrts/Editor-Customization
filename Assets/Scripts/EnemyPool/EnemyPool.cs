@@ -11,6 +11,7 @@ public class EnemyPool : MonoBehaviour
 
     public void InitializeSpawnData()
     {
+        _spawnedEnemies = 0;
         SpawnDatas = new List<SpawnData>();
 
         int enemyTypesCount = System.Enum.GetNames(typeof(Enemies)).Length;
