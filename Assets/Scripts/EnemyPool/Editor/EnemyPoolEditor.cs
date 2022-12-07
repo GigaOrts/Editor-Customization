@@ -25,14 +25,7 @@ public class EnemyPoolEditor : Editor
     {
         EditorGUILayout.PropertyField(_spawnedEnemies);
 
-        SpawnData spawnData = _enemyPool.SpawnDatas[0];
-        GUILayout.Label(spawnData.EnemiesType.ToString());
-
-        spawnData.IsRandomCount = EditorGUILayout.Toggle("Random Count", spawnData.IsRandomCount);
-        if (spawnData.IsRandomCount)
-            spawnData.Range = EditorGUILayout.Vector2IntField("Random Range", spawnData.Range);
-        else
-            spawnData.Count = EditorGUILayout.IntField("Count", spawnData.Count);
+        DrawFlaggedEnemies();
 
         if (GUI.changed)
         {
@@ -42,4 +35,42 @@ public class EnemyPoolEditor : Editor
 
         serializedObject.ApplyModifiedProperties();
     }
+
+    private void DrawFlaggedEnemies()
+    {
+        int enemyTypesCount = System.Enum.GetNames(typeof(Enemies)).Length;
+
+        for (int i = 0; i < enemyTypesCount; i++)
+        {
+            Enemies enemyType = (Enemies)(1 << i);
+            if (_enemyPool.SpawnedEnemies.HasFlag(enemyType))
+            {
+                SpawnData spawnData = GetSpawnData(enemyType);
+                if (spawnData != null)
+                    DrawEnemySettings(spawnData);
+            }
+        }
+    }
+
+    private void DrawEnemySettings(SpawnData spawnData)
+    {
+        GUILayout.Label(spawnData.EnemiesType.ToString());
+        spawnData.IsRandomCount = EditorGUILayout.Toggle("Random Count", spawnData.IsRandomCount);
+
+        if (spawnData.IsRandomCount)
+            spawnData.Range = EditorGUILayout.Vector2IntField("Random Range", spawnData.Range);
+        else
+            spawnData.Count = EditorGUILayout.IntField("Count", spawnData.Count);
+    }
+
+    private SpawnData GetSpawnData(Enemies enemyType)
+    {
+        for (int i = 0; i < _enemyPool.SpawnDatas.Count; i++)
+        {
+            if (_enemyPool.SpawnDatas[i].EnemiesType == enemyType)
+                return _enemyPool.SpawnDatas[i];
+        }
+
+        return null;
+    }    
 }

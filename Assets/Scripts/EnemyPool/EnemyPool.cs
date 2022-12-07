@@ -7,6 +7,8 @@ public class EnemyPool : MonoBehaviour
 
     [SerializeField] private Enemies _spawnedEnemies;
 
+    public Enemies SpawnedEnemies => _spawnedEnemies;
+
     public void InitializeSpawnData()
     {
         SpawnDatas = new List<SpawnData>();
