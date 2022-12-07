@@ -258,7 +258,7 @@ MonoBehaviour:
     IsRandomCount: 0
     Range: {x: 0, y: 0}
     EnemiesType: 4
-  _spawnedEnemies: -1
+  _spawnedEnemies: 0
 --- !u!4 &734448774
 Transform:
   m_ObjectHideFlags: 0

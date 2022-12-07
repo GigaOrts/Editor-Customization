@@ -26,8 +26,11 @@ public class EnemyPoolEditor : Editor
         EditorGUILayout.PropertyField(_spawnedEnemies);
 
         DrawFlaggedEnemies();
+
+        GUILayout.BeginHorizontal();
         DrawResetButton();
         DrawSpawnButton();
+        GUILayout.EndHorizontal();
 
         if (GUI.changed)
         {
