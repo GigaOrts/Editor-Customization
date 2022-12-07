@@ -22,6 +22,8 @@ public class EnemyPoolEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        
+        EditorGUILayout.PropertyField(_spawnedEnemies);
+
+        serializedObject.ApplyModifiedProperties();
     }
 }
