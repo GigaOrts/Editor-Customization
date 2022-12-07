@@ -54,6 +54,8 @@ public class EnemyPoolEditor : Editor
 
     private void DrawEnemySettings(SpawnData spawnData)
     {
+        GUILayout.BeginVertical(GUI.skin.box);
+
         GUILayout.Label(spawnData.EnemiesType.ToString());
         spawnData.IsRandomCount = EditorGUILayout.Toggle("Random Count", spawnData.IsRandomCount);
 
@@ -61,6 +63,8 @@ public class EnemyPoolEditor : Editor
             spawnData.Range = EditorGUILayout.Vector2IntField("Random Range", spawnData.Range);
         else
             spawnData.Count = EditorGUILayout.IntField("Count", spawnData.Count);
+
+        GUILayout.EndVertical();
     }
 
     private SpawnData GetSpawnData(Enemies enemyType)

@@ -246,9 +246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnDatas:
-  - Count: 34
-    IsRandomCount: 1
-    Range: {x: 141, y: 0}
+  - Count: 0
+    IsRandomCount: 0
+    Range: {x: 0, y: 0}
     EnemiesType: 1
   - Count: 0
     IsRandomCount: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
     IsRandomCount: 0
     Range: {x: 0, y: 0}
     EnemiesType: 4
-  _spawnedEnemies: 0
+  _spawnedEnemies: -1
 --- !u!4 &734448774
 Transform:
   m_ObjectHideFlags: 0
