@@ -24,6 +24,15 @@ public class EnemyPoolEditor : Editor
     {
         EditorGUILayout.PropertyField(_spawnedEnemies);
 
+        SpawnData spawnData = _enemyPool.SpawnDatas[0];
+        GUILayout.Label(spawnData.EnemiesType.ToString());
+
+        spawnData.IsRandomCount = EditorGUILayout.Toggle("Random Count", spawnData.IsRandomCount);
+        if (spawnData.IsRandomCount)
+            spawnData.Range = EditorGUILayout.Vector2IntField("Random Range", spawnData.Range);
+        else
+            spawnData.Count = EditorGUILayout.IntField("Count", spawnData.Count);
+
         serializedObject.ApplyModifiedProperties();
     }
 }
