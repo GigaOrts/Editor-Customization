@@ -1,3 +1,4 @@
+[System.Flags]
 public enum Enemies
 {
     Warrior,
