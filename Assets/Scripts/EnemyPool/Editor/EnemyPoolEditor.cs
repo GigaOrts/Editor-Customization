@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(EnemyPool))]
 public class EnemyPoolEditor : Editor
@@ -32,6 +33,12 @@ public class EnemyPoolEditor : Editor
             spawnData.Range = EditorGUILayout.Vector2IntField("Random Range", spawnData.Range);
         else
             spawnData.Count = EditorGUILayout.IntField("Count", spawnData.Count);
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(_enemyPool);
+            EditorSceneManager.MarkSceneDirty(_enemyPool.gameObject.scene);
+        }
 
         serializedObject.ApplyModifiedProperties();
     }
