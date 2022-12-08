@@ -60,5 +60,9 @@ public class CameraTransitionEditor : Editor
                 }
             }
         }
+
+        EnumEditor.WriteToFile(_routeName, _pathToEnumFile);
+
+        _routeName = string.Empty;
     }
 }
