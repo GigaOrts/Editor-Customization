@@ -25,4 +25,21 @@ public static class EnumEditor
 
         File.WriteAllLines(path, data, Encoding.Default);
     }
+
+    public static bool TryRemoveFromFile(string name, string path)
+    {
+        List<string> data = File.ReadAllLines(path).ToList();
+
+        for (int i = 0; i < data.Count; i++)
+        {
+            if (data[i].Contains(name))
+            {
+                data.RemoveAt(i);
+                File.WriteAllLines(path, data, Encoding.Default);
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
