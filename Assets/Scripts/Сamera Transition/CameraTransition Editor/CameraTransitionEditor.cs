@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Text.RegularExpressions;
 using System;
+using System.Linq;
 
 [CustomEditor(typeof(CameraTransition))]
 public class CameraTransitionEditor : Editor
@@ -62,7 +63,63 @@ public class CameraTransitionEditor : Editor
         }
 
         EnumEditor.WriteToFile(_routeName, _pathToEnumFile);
+        Refresh();
 
         _routeName = string.Empty;
+    }
+
+    private void RemoveRoute(Route route)
+    {
+        if (!EnumEditor.TryRemoveFromFile(route.Name.ToString(), _pathToEnumFile))
+            return;
+
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        Debug.Log("WAIT");
+        string relativePath = _pathToEnumFile.Substring(_pathToEnumFile.IndexOf("Assets"));
+        AssetDatabase.ImportAsset(relativePath);
+    }
+
+    private List<Route> RefreshRoutes(List<Route> oldRoutes)
+    {
+        int countRoute = Enum.GetNames(typeof(RouteName)).Length;
+        List<Route> routes = new List<Route>(countRoute);
+
+        for (int i = 0; i < countRoute; i++)
+        {
+            RouteName routeName = (RouteName)i;
+            Route route = TryRestoreRoute(oldRoutes, routeName.ToString());
+
+            if(route == null)
+            {
+                route = CreateNewRoute(routeName);
+            }
+
+            routes.Add(route);
+        }
+
+        return routes;
+    }
+
+    private Route TryRestoreRoute(List<Route> oldRoutes, string name)
+    {
+        return oldRoutes.FirstOrDefault(o => o.Name.ToString() == name);
+    }
+
+    private Route CreateNewRoute(RouteName routeName)
+    {
+        Route route = new Route
+        {
+            Name = routeName,
+            RoutePartSettings = new RoutePartSettings[1]
+            {
+                new RoutePartSettings(Vector3.zero)
+            }
+        };
+
+        return route;
     }
 }
