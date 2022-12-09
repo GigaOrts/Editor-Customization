@@ -24,6 +24,12 @@ public class CameraTransitionEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        base.DrawDefaultInspector();
+
+        _cameraTransition.Routes = RefreshRoutes(_cameraTransition.Routes);
+
+        RouteSection.Draw(_cameraTransition.Routes);
+
         DrawNewClipSelection();
     }
 
@@ -114,9 +120,9 @@ public class CameraTransitionEditor : Editor
         Route route = new Route
         {
             Name = routeName,
-            RoutePartSettings = new RoutePartSettings[1]
+            PartSettings = new PartSettings[1]
             {
-                new RoutePartSettings(Vector3.zero)
+                new PartSettings(Vector3.zero)
             }
         };
 

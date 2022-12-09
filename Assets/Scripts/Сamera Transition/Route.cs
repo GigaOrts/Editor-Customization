@@ -5,5 +5,5 @@ public class Route
 {
     [HideInInspector] public string ID;
     [HideInInspector] public RouteName Name;
-    [HideInInspector] public RoutePartSettings[] RoutePartSettings;
+    [HideInInspector] public PartSettings[] PartSettings;
 }
