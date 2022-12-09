@@ -36,14 +36,14 @@ public static class RouteSection
     {
         if (GUILayout.Button("Add", GUILayout.Width(45), GUILayout.Height(30)))
         {
-            var PartSettings = new PartSettings[route.PartSettings.Length + 1];
-            for (int i = 0; i < PartSettings.Length - 1; i++)
+            PartSettings[] partSettings = new PartSettings[route.PartSettings.Length + 1];
+            for (int i = 0; i < partSettings.Length - 1; i++)
             {
-                PartSettings[i] = route.PartSettings[i];
+                partSettings[i] = route.PartSettings[i];
             }
 
-            PartSettings[PartSettings.Length - 1] = new PartSettings(PartSettings[PartSettings.Length - 2].Position + new Vector3(3, 0, 0));
-            route.PartSettings = PartSettings;
+            partSettings[partSettings.Length - 1] = new PartSettings(partSettings[partSettings.Length - 2].Position + new Vector3(3, 0, 0));
+            route.PartSettings = partSettings;
         }
     }
 }
