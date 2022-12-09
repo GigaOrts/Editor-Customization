@@ -22,7 +22,7 @@ public static class RouteSection
                 EditorGUILayout.LabelField($"Point {i + 1}");
 
                 routePartSetting.Position = EditorGUILayout.Vector3Field("Position", routePartSetting.Position);
-                routePartSetting.Rotation= EditorGUILayout.Vector3Field("Rotation", routePartSetting.Position);
+                routePartSetting.Rotation= EditorGUILayout.Vector3Field("Rotation", routePartSetting.Rotation);
                 routePartSetting.MoveDuration = EditorGUILayout.FloatField("MoveDuration", routePartSetting.MoveDuration);
 
                 EditorGUILayout.EndVertical();
