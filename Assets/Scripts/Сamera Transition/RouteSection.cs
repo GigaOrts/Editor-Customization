@@ -20,6 +20,7 @@ public static class RouteSection
 
                 EditorGUILayout.BeginVertical(GUI.skin.window);
                 EditorGUILayout.LabelField($"Point {i + 1}");
+                DrawDeletePathButton(routes[routeNumber], i);
 
                 routePartSetting.Position = EditorGUILayout.Vector3Field("Position", routePartSetting.Position);
                 routePartSetting.Rotation= EditorGUILayout.Vector3Field("Rotation", routePartSetting.Rotation);
@@ -28,6 +29,7 @@ public static class RouteSection
                 EditorGUILayout.EndVertical();
             }
 
+            DrawAddRoutePathButton(routes[routeNumber]);
             EditorGUILayout.EndVertical();
         }
     }
@@ -42,8 +44,28 @@ public static class RouteSection
                 partSettings[i] = route.PartSettings[i];
             }
 
-            partSettings[partSettings.Length - 1] = new PartSettings(partSettings[partSettings.Length - 2].Position + new Vector3(3, 0, 0));
+            partSettings[partSettings.Length - 1] = new PartSettings(partSettings[partSettings.Length - 2].Position + new Vector3(3f, 0f, 0f));
             route.PartSettings = partSettings;
+        }
+    }
+    
+    private static void DrawDeletePathButton(Route route, int index)
+    {
+        if (GUILayout.Button("-", GUILayout.Width(17), GUILayout.Height(17)))
+        {
+            PartSettings[] parts = new PartSettings[route.PartSettings.Length - 1];
+
+            for (int i = 0; i < index; i++)
+            {
+                parts[i] = route.PartSettings[i];
+            }
+
+            for (int i = index + 1; i < parts.Length + 1; i++)
+            {
+                parts[i - 1] = route.PartSettings[i];
+            }
+
+            route.PartSettings = parts;
         }
     }
 }

@@ -1,6 +1,5 @@
 public enum RouteName
 {
-
-	Rer,
-	Sdsd,
+	Sds,
+	Kek,
 }
